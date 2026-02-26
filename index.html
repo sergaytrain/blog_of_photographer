@@ -3,318 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog of photographer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>sergaytrain // Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --gray: #7f8c8d;
-            --transition: all 0.3s ease;
+            --bg: #0a0a0c;
+            --card: #16161a;
+            --accent: #00a3ff;
+            --text: #e1e1e6;
+            --muted: #737380;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            color: var(--dark);
-            background-color: #f9f9f9;
             overflow-x: hidden;
         }
 
-        /* Навигация */
-        .nav {
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 1.5rem 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
-            background-color: white;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .logo h1 {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary);
-            letter-spacing: -0.5px;
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: -1px;
         }
 
-        .links {
-            position: relative;
-        }
+        .logo span { color: var(--accent); }
 
-        .openmenu {
+        .nav-links { position: relative; }
+        
+        .menu-btn {
+            background: var(--accent);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 4px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: var(--transition);
-            font-weight: 500;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
         }
 
-        .openmenu:hover {
-            background-color: var(--light);
-        }
-
-        .openmenu p {
-            margin: 0;
-        }
-
-        .open {
+        .dropdown {
             position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            top: 100%; right: 0;
+            background: var(--card);
+            min-width: 220px;
+            margin-top: 1rem;
             border-radius: 8px;
-            padding: 1rem;
-            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-10px);
-            transition: var(--transition);
-            z-index: 10;
+            transform: translateY(10px);
+            transition: 0.3s;
         }
 
-        .openmenu:hover .open {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        .nav-links:hover .dropdown {
+            opacity: 1; visibility: visible; transform: translateY(0);
         }
 
-        .open a {
-            display: block;
-            padding: 0.7rem 0;
-            color: var(--dark);
+        .dropdown a {
+            color: var(--text);
+            padding: 12px 20px;
             text-decoration: none;
-            border-bottom: 1px solid #eee;
-            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .open a:last-child {
-            border-bottom: none;
+        .dropdown a:hover { background: rgba(255,255,255,0.05); color: var(--accent); }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(10,10,12,0), var(--bg)), 
+                        url('https://railgallery.ru/_update_temp/upload/215694_1.jpg'); /* Заглушка фона */
+            background-size: cover;
+            background-position: center;
         }
 
-        .open a:hover {
-            color: var(--secondary);
+        .hero h1 { font-size: 4rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .hero p { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; }
+
+        /* Main Content */
+        .container { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
 
-        /* Основной контент */
-        .main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .section {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        .card {
+            background: var(--card);
             padding: 2.5rem;
-            margin-bottom: 3rem;
-            transition: var(--transition);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
         }
 
-        .section:hover {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+
+        .nick-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        h1:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--secondary);
-            border-radius: 3px;
-        }
-
-        .bio p {
-            margin-bottom: 1.5rem;
-            color: var(--gray);
-            font-size: 1.1rem;
-        }
-
-        .map-container {
-            margin-top: 2rem;
+        .nick-item {
+            background: #000;
+            padding: 15px;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .map-container iframe {
-            width: 100%;
+        .nick-item label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+        .nick-item div { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 1.1rem; }
+
+        /* Gallery Links */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-card {
+            position: relative;
             height: 400px;
-            border: none;
-            display: block;
-        }
-
-        /* Iframe секции */
-        .trainfoto, .railgallery {
-            margin-top: 2rem;
-        }
-
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            height: 600px;
+            text-decoration: none;
+            color: #fff;
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        .gallery-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: 0.5s; filter: grayscale(50%) brightness(0.6);
         }
 
-        /* Адаптивность */
+        .gallery-card:hover img { filter: grayscale(0%) brightness(0.8); transform: scale(1.1); }
+
+        .gallery-info {
+            position: absolute;
+            bottom: 0; left: 0; padding: 2rem;
+            z-index: 2;
+        }
+
+        .gallery-info h3 { font-size: 1.5rem; margin-bottom: 5px; }
+        .gallery-info span { font-family: 'JetBrains Mono', monospace; color: var(--accent); }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
         @media (max-width: 768px) {
-            .nav {
-                padding: 1rem 5%;
-            }
-            
-            .logo h1 {
-                font-size: 1.2rem;
-            }
-            
-            .main {
-                padding: 1.5rem 1rem;
-            }
-            
-            .section {
-                padding: 1.5rem;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            .iframe-container {
-                height: 400px;
-            }
-        }
-
-        /* Анимации */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section {
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        .trainfoto {
-            animation-delay: 0.2s;
-        }
-
-        .railgallery {
-            animation-delay: 0.4s;
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="nav">
-        <div class="logo">
-            <h1>Blog of photographer</h1>
+
+    <nav>
+        <div class="logo">SERGAY<span>TRAIN</span></div>
+        <div class="nav-links">
+            <button class="menu-btn">СВЯЗЬ</button>
+            <div class="dropdown">
+                <a href="https://vk.com/blogofphotographer" target="_blank"><i class="fab fa-vk"></i> VK Community</a>
+                <a href="https://t.me/photograph_blog" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="https://www.youtube.com/@UrbanRussiantrains" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+            </div>
         </div>
-        <div class="links">
-            <div class="openmenu">
-                <p>Соц-Сети</p>
-                <i class="fas fa-chevron-down"></i>
-                <div class="open">
-                    <a href="https://vk.com/blogofphotographer"><i class="fab fa-vk"></i> VK-сообщество</a>
-                    <a href="https://t.me/photograph_blog"><i class="fab fa-telegram"></i> Telegram-канал</a>
-                    <a href="https://www.youtube.com/@UrbanRussiantrains">Ютуб канал</a>
+    </nav>
+
+    <div class="hero">
+        <h1>Spotter. Vision.</h1>
+        <p>Kamensk-Uralsky / Sverdlovsk Railway</p>
+    </div>
+
+    <div class="container">
+        <div class="about-grid">
+            <div class="card">
+                <h2 style="margin-bottom: 1.5rem;">О проекте</h2>
+                <p>Я фиксирую историю железных дорог Урала. От тяжелых грузовых составов до городского транспорта. Мой стиль — это сочетание технической точности споттинга и атмосферы индустриального пейзажа.</p>
+            </div>
+            <div class="card nick-box">
+                <div class="nick-item">
+                    <label>Main ID</label>
+                    <div>sergaytrain</div>
+                </div>
+                <div class="nick-item">
+                    <label>Bus Archives</label>
+                    <div>shotgraph</div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="main">
-        <div class="section bio">
-            <h1>Обо мне</h1>
-            <p>Я не сильно распространяю информацию о своей жизни и себе, но: я фотограф поездов из г. Каменска-Уральского, находится на Урале. Город связывает более известные города как Екатеринбург с Курганом, и Богданович с Курганом.</p>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d70617.45768845252!2d61.86459921106772!3d56.41958694675853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c6d995b4a85523%3A0x6b0489af02daa134!2z0JrQsNC80LXQvdGB0Lot0KPRgNCw0LvRjNGB0LrQuNC5LCDQodCy0LXRgNC00LvQvtCy0YHQutCw0Y8g0L7QsdC7Lg!5e0!3m2!1sru!2sru!4v1760373316276!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
+
+        <h2 style="margin-bottom: 2rem; font-family: 'JetBrains Mono';">Галлереи</h2>
         
-        <div class="section trainfoto">
-            <h1>Мои фотографии на trainfoto</h1>
-            <div class="iframe-container">
-                <iframe src="https://trainfoto.ru/search.php?aid=2734&auth=1"></iframe>
-            </div>
-        </div>
-        
-        <div class="section railgallery">
-            <h1>Мои фотографии на railgallery</h1>
-            <div class="iframe-container">
-                <iframe src="https://railgallery.ru/search.php?aid=7420&auth=1"></iframe>
-            </div>
+        <div class="gallery-grid">
+            <a href="https://railgallery.ru/author/7420/" class="gallery-card" target="_blank">
+                <img src="https://railgallery.ru/_update_temp/upload/217039_1.jpg" alt="RailGallery">
+                <div class="gallery-info">
+                    <h3>RailGallery</h3>
+                    <span>Посмотреть профиль →</span>
+                </div>
+            </a>
+
+            <a href="https://trainfoto.ru/author/2734/" class="gallery-card" target="_blank">
+                <img src="https://trainfoto.ru/photo/00/97/16/97163.jpg?1" alt="TrainFoto">
+                <div class="gallery-info">
+                    <h3>TrainFoto</h3>
+                    <span>Открыть коллекцию →</span>
+                </div>
+            </a>
+
+            <a href="https://fotobus.msk.ru/author/45294/" class="gallery-card" target="_blank">
+                <img src="https://fotobus.msk.ru/photo/37/69/07/3769075.jpg" alt="TrainFoto">
+                <div class="gallery-info">
+                    <h3>FotoBus</h3>
+                    <span>Просмотреть →</span>
+                </div>
+            </a>
         </div>
     </div>
 
+    <footer>
+        <p>&copy; 2026 sergaytrain. Все права защищены.</p>
+        <p style="margin-top: 10px; font-size: 0.7rem;">Сделано с любовью к поездам.</p>
+    </footer>
+
     <script>
-        // Динамическое изменение title
-        const titles = [
-            "Blog of photographer",
-            "train photographer",
-            "Spotter from ural",
-            "Railway photography"
-        ];
-        
-        let currentTitleIndex = 0;
-        
-        function changeTitle() {
-            document.title = titles[currentTitleIndex];
-            currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-        }
-        
-        // Меняем title сразу при загрузке и затем каждые 2 секунды
-        changeTitle();
-        setInterval(changeTitle, 2000);
-        
-        // Плавная прокрутка для всех ссылок
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        // Динамический заголовок
+        const titles = ["sergaytrain", "shotgraph", "Ural Transport"];
+        let current = 0;
+        setInterval(() => {
+            document.title = titles[current];
+            current = (current + 1) % titles.length;
+        }, 3000);
     </script>
 </body>
 </html>
-
-
-
-
